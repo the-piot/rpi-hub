@@ -1,0 +1,27 @@
+volumes:
+  mosquitto_storage:
+    name: mosquitto_storage
+
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mosquitto
+    restart: unless-stopped
+    ports:
+      - 1883:1883
+      - 9001:9001
+    expose:
+      - 1883
+      - 9001
+    networks:
+      - the-piot
+    volumes:
+      - mosquitto_storage:/mosquitto
+      - /mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - /mosquitto/config/pwfile:/mosquitto/config/pwfile
+
+networks:
+  the-piot:
+    name: the-piot
+    external: true

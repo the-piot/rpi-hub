@@ -1,0 +1,28 @@
+volumes:
+  n8n_storage:
+    name: n8n_storage
+
+services:
+  n8n:
+    image: n8nio/n8n
+    container_name: n8n
+    restart: unless-stopped
+    environment:
+      GENERIC_TIMEZONE: Europe/London
+      NODE_ENV: production
+      N8N_SECURE_COOKIE: false
+    ports:
+      - 5678:5678
+    expose:
+      - 5678
+    volumes:
+      - n8n_storage:/home/node/.n8n
+    networks:
+      - the-piot
+    depends_on:
+      - mysql
+
+networks:
+  the-piot:
+    name: the-piot
+    external: true

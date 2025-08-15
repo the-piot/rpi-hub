@@ -1,0 +1,25 @@
+{
+	"name": "Docker in Docker",
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"version": "latest",
+			"enableNonRootDocker": "true",
+			"moby": "true"
+		}
+	},
+	"forwardPorts": [
+		3000,
+		1883,
+		9001,
+		3306,
+		5678
+	],
+	"runArgs": [
+		"-p=3000:3000",
+		"-p=1883:1883",
+		"-p=9001:9001",
+		"-p=3306:3306",
+		"-p=5678:5678"
+	]
+}
