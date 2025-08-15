@@ -18,8 +18,8 @@ services:
       - the-piot
     volumes:
       - mosquitto_storage:/mosquitto
-      - /mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
-      - /mosquitto/config/pwfile:/mosquitto/config/pwfile
+      - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./mosquitto/config/pwfile:/mosquitto/config/pwfile
 
 networks:
   the-piot:
