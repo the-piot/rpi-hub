@@ -1,0 +1,30 @@
+{
+  "name": "Process Sensor",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mqttTrigger",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        0
+      ],
+      "id": "34241868-8158-4679-9f32-e7e16ec2717e",
+      "name": "MQTT Trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "02f47c1f-5f0e-46a0-be29-581bb53e4008",
+  "meta": {
+    "instanceId": "da5a8370f3905939440e73c9228d5064581a52491f6549ac9e0b62723f47ecb4"
+  },
+  "id": "v2KfJPj9sFE0zPog",
+  "tags": []
+}

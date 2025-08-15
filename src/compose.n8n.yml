@@ -1,0 +1,46 @@
+volumes:
+  n8n_storage:
+    name: n8n_storage
+
+services:
+  n8n:
+    build:
+      context: ./n8n
+      dockerfile: Dockerfile
+    container_name: n8n
+    restart: unless-stopped
+    environment:
+      GENERIC_TIMEZONE: Europe/London
+      TZ: Europe/London
+      NODE_ENV: production
+      N8N_SECURE_COOKIE: false
+      N8N_RUNNERS_ENABLED: true
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: true
+
+
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-db}
+      MYSQL_USER: ${MYSQL_USER:-user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-password}      
+
+      MOSQUITTO_HOST: mosquitto
+      MOSQUITTO_PORT: 1883
+      MOSQUITTO_USERNAME: ${MOSQUITTO_USERNAME:-mosquitto}
+      MOSQUITTO_PASSWORD: ${MOSQUITTO_PASSWORD:-mosquitto}
+
+    ports:
+      - 5678:5678
+    expose:
+      - 5678
+    volumes:
+      - n8n_storage:/home/node/.n8n
+    networks:
+      - the-piot
+    depends_on:
+      - mysql
+
+networks:
+  the-piot:
+    name: the-piot
+    external: true

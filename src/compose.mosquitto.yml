@@ -1,0 +1,32 @@
+volumes:
+  mosquitto_storage:
+    name: mosquitto_storage
+
+
+services:
+  mosquitto:
+    build:
+      context: ./mosquitto
+      dockerfile: Dockerfile
+      args:
+        - MOSQUITTO_VERSION=latest
+    container_name: mosquitto
+    restart: unless-stopped
+    environment:
+      MOSQUITTO_USERNAME: ${MOSQUITTO_USERNAME:-mosquitto}
+      MOSQUITTO_PASSWORD: ${MOSQUITTO_PASSWORD:-mosquitto}
+    ports:
+      - 1883:1883
+      - 9001:9001
+    expose:
+      - 1883
+      - 9001
+    networks:
+      - the-piot
+    volumes:
+      - mosquitto_storage:/mosquitto
+
+networks:
+  the-piot:
+    name: the-piot
+    external: true
