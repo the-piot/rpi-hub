@@ -18,6 +18,7 @@ services:
       - 3306
     volumes:
       - mysql_storage:/var/lib/mysql
+      - ./mysql/sql:/docker-entrypoint-initdb.d
     networks:
       - the-piot
 
