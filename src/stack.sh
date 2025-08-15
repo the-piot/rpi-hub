@@ -55,7 +55,7 @@ case "$1" in
   up)
     echo -e "${BLUE}Bringing up all services...${NC}"
     create_network_if_missing
-    docker compose $COMPOSE_ARGS up -d
+    docker compose $COMPOSE_ARGS up -d --build
     echo -e "${GREEN}All services are up and running.${NC}"
     show_summary
     ;;

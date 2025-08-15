@@ -5,9 +5,16 @@ volumes:
 
 services:
   mosquitto:
-    image: eclipse-mosquitto
+    build:
+      context: ./mosquitto
+      dockerfile: Dockerfile
+      args:
+        - MOSQUITTO_VERSION=latest
     container_name: mosquitto
     restart: unless-stopped
+    environment:
+      MOSQUITTO_USERNAME: ${MOSQUITTO_USERNAME:-mosquitto}
+      MOSQUITTO_PASSWORD: ${MOSQUITTO_PASSWORD:-mosquitto}
     ports:
       - 1883:1883
       - 9001:9001
@@ -18,8 +25,6 @@ services:
       - the-piot
     volumes:
       - mosquitto_storage:/mosquitto
-      - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
-      - ./mosquitto/config/pwfile:/mosquitto/config/pwfile
 
 networks:
   the-piot:
